@@ -1,0 +1,15 @@
+{
+  "name": "laya-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local Jev-compatible decision server (Laya) with optional cascade to TypeSafe Jev",
+  "main": "src/server.mjs",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node src/server.mjs",
+    "test": "node --test test/*.test.mjs"
+  },
+  "dependencies": { "@receptron/laya": "^0.1.0" },
+  "license": "MIT"
+}
