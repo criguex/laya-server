@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="320" viewBox="0 0 1280 320" role="img" aria-label="laya-server · Local decisions, cloud only when in doubt">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#55DFBD" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+    <clipPath id="r"><rect width="1280" height="320" rx="20"/></clipPath>
+  </defs>
+  <g clip-path="url(#r)">
+    <rect width="1280" height="320" fill="#071B2B"/>
+    <rect width="1280" height="320" fill="url(#grid)"/>
+    <rect x="0" y="0" width="8" height="320" fill="#55DFBD"/>
+  </g>
+  <g font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif">
+    <text x="64" y="118" font-size="54" font-weight="700" fill="#F4F7F5">laya-server</text>
+    <text x="66" y="164" font-size="22" fill="#F4F7F5">Local, free decision server with the Jev contract.</text>
+    <text x="66" y="196" font-size="22" fill="#ABC0C8">Confident answers stay on your machine; doubtful</text>
+    <text x="66" y="226" font-size="22" fill="#ABC0C8">or long ones go to the cloud, or to a human.</text>
+    <text x="66" y="276" font-size="15" font-weight="600" fill="#55DFBD">Cristian Guerra · QA · Medellín</text>
+  </g>
+  <rect x="736" y="56" width="480" height="208" rx="16" fill="#0D2638" stroke="#214456"/>
+  <circle cx="760" cy="80" r="5" fill="#214456"/><circle cx="778" cy="80" r="5" fill="#214456"/><circle cx="796" cy="80" r="5" fill="#214456"/>
+  <g font-family="Menlo,Consolas,monospace" font-size="15">
+    <text x="760" y="122" fill="#F4F7F5">$ npm test</text>
+    <text x="760" y="154" fill="#55DFBD">✔ <tspan fill="#F4F7F5">confident local answers stay local</tspan></text>
+    <text x="760" y="180" fill="#55DFBD">✔ <tspan fill="#F4F7F5">low confidence cascades to jev when available</tspan></text>
+    <text x="760" y="206" fill="#55DFBD">✔ <tspan fill="#F4F7F5">long state goes straight to jev</tspan></text>
+    <text x="760" y="238" fill="#ABC0C8">ℹ tests 7 · pass 7 · fail 0</text>
+  </g>
+</svg>

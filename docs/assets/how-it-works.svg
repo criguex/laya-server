@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="560" viewBox="0 0 1280 560" role="img" aria-label="How laya-server routes each POST /v1/systemone: long states go to Jev, Laya answers locally, low confidence cascades to Jev, cloud errors come back with escalate true">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#55DFBD" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#55DFBD"/></marker>
+    <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#FFC56E"/></marker>
+    <marker id="c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#FB8176"/></marker>
+  </defs>
+  <rect width="1280" height="560" rx="20" fill="#071B2B"/>
+  <rect width="1280" height="560" rx="20" fill="url(#grid)"/>
+
+  <g font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif">
+    <text x="40" y="52" font-size="26" font-weight="700" fill="#F4F7F5">How laya-server routes a decision</text>
+    <text x="40" y="80" font-size="15" fill="#ABC0C8">Every POST /v1/systemone follows route() in src/policy.mjs and decide() in src/server.mjs.</text>
+
+    <g fill="none" stroke-width="2.5">
+      <path d="M230 335H266" stroke="#55DFBD" marker-end="url(#a)"/>
+      <path d="M480 335H516" stroke="#55DFBD" marker-end="url(#a)"/>
+      <path d="M720 335H756" stroke="#55DFBD" marker-end="url(#a)"/>
+      <path d="M990 335H1046" stroke="#55DFBD" marker-end="url(#a)"/>
+      <path d="M375 290V152H516" stroke="#55DFBD" marker-end="url(#a)"/>
+      <path d="M875 290V250H640V204" stroke="#55DFBD" marker-end="url(#a)"/>
+      <path d="M760 128H1046" stroke="#55DFBD" marker-end="url(#a)"/>
+      <path d="M760 190H1046" stroke="#FB8176" marker-end="url(#c)"/>
+      <path d="M375 380V436" stroke="#FFC56E" stroke-dasharray="6 5" marker-end="url(#g)"/>
+      <path d="M875 380V436" stroke="#FFC56E" stroke-dasharray="6 5" marker-end="url(#g)"/>
+    </g>
+
+    <g font-size="13" fill="#ABC0C8">
+      <text x="386" y="226">yes · long_state</text>
+      <text x="486" y="326">no</text>
+      <text x="886" y="272">no · low_confidence</text>
+      <text x="1000" y="326">yes</text>
+      <text x="386" y="414">yes, no cascade</text>
+      <text x="886" y="414">no, no cascade</text>
+    </g>
+
+    <rect x="40" y="290" width="190" height="90" rx="12" fill="#0D2638" stroke="#214456"/>
+    <text x="58" y="320" font-size="17" font-weight="700" fill="#F4F7F5">Client</text>
+    <text x="58" y="344" font-size="13" font-family="Menlo,Consolas,monospace" fill="#ABC0C8">POST /v1/systemone</text>
+    <text x="58" y="364" font-size="13" font-family="Menlo,Consolas,monospace" fill="#ABC0C8">state + questions</text>
+
+    <rect x="270" y="290" width="210" height="90" rx="12" fill="#0D2638" stroke="#214456"/>
+    <text x="288" y="322" font-size="16" font-weight="700" fill="#F4F7F5">State too long?</text>
+    <text x="288" y="346" font-size="13" font-family="Menlo,Consolas,monospace" fill="#ABC0C8">&gt; MAX_LOCAL_CHARS</text>
+    <text x="288" y="366" font-size="13" fill="#ABC0C8">default 1500 characters</text>
+
+    <rect x="520" y="290" width="200" height="90" rx="12" fill="#0D2638" stroke="#55DFBD"/>
+    <text x="538" y="322" font-size="16" font-weight="700" fill="#F4F7F5">Laya, local CPU</text>
+    <text x="538" y="346" font-size="13" fill="#ABC0C8">open model, ~2 GB RAM</text>
+    <text x="538" y="366" font-size="13" fill="#ABC0C8">no data leaves the machine</text>
+
+    <rect x="760" y="290" width="230" height="90" rx="12" fill="#0D2638" stroke="#214456"/>
+    <text x="778" y="322" font-size="16" font-weight="700" fill="#F4F7F5">Confident enough?</text>
+    <text x="778" y="346" font-size="13" fill="#ABC0C8">min confidence of all answers</text>
+    <text x="778" y="366" font-size="13" font-family="Menlo,Consolas,monospace" fill="#ABC0C8">≥ CASCADE_THRESHOLD 0.8</text>
+
+    <rect x="1050" y="290" width="190" height="90" rx="12" fill="#0D2638" stroke="#55DFBD"/>
+    <text x="1068" y="322" font-size="16" font-weight="700" fill="#55DFBD">✓ <tspan fill="#F4F7F5">Answer</tspan></text>
+    <text x="1068" y="346" font-size="13" font-family="Menlo,Consolas,monospace" fill="#ABC0C8">decider: laya</text>
+    <text x="1068" y="366" font-size="13" font-family="Menlo,Consolas,monospace" fill="#ABC0C8">reason: confident</text>
+
+    <rect x="520" y="108" width="240" height="96" rx="12" fill="#123448" stroke="#214456"/>
+    <text x="538" y="140" font-size="16" font-weight="700" fill="#F4F7F5">Jev in the cloud</text>
+    <text x="538" y="164" font-size="13" font-family="Menlo,Consolas,monospace" fill="#ABC0C8">CASCADE_URL + CASCADE_KEY</text>
+    <text x="538" y="184" font-size="13" fill="#ABC0C8">timeout 8 s by default</text>
+
+    <rect x="1050" y="98" width="190" height="60" rx="12" fill="#0D2638" stroke="#55DFBD"/>
+    <text x="1068" y="124" font-size="16" font-weight="700" fill="#55DFBD">✓ <tspan fill="#F4F7F5">Answer</tspan></text>
+    <text x="1068" y="145" font-size="13" font-family="Menlo,Consolas,monospace" fill="#ABC0C8">decider: jev</text>
+
+    <rect x="1050" y="168" width="190" height="80" rx="12" fill="#0D2638" stroke="#FB8176"/>
+    <text x="1068" y="194" font-size="15" font-weight="700" fill="#FB8176">✗ <tspan fill="#F4F7F5">Cloud error</tspan></text>
+    <text x="1068" y="215" font-size="13" fill="#ABC0C8">Laya answers instead</text>
+    <text x="1068" y="235" font-size="13" font-family="Menlo,Consolas,monospace" fill="#FFC56E">escalate: true</text>
+
+    <rect x="270" y="440" width="720" height="70" rx="12" fill="#0D2638" stroke="#FFC56E"/>
+    <text x="290" y="470" font-size="15" font-weight="700" fill="#FFC56E">! <tspan fill="#F4F7F5">No cascade configured: Laya keeps the answer and flags it for a human</tspan></text>
+    <text x="290" y="494" font-size="13" font-family="Menlo,Consolas,monospace" fill="#ABC0C8">decider: laya · escalate: true · reason: long_state_truncated or low_confidence</text>
+
+    <text x="40" y="420" font-size="13" fill="#FB8176">✗ <tspan fill="#ABC0C8">wrong LAYA_TOKEN → 401</tspan></text>
+    <text x="40" y="444" font-size="13" fill="#FB8176">✗ <tspan fill="#ABC0C8">no questions → 400</tspan></text>
+    <text x="40" y="468" font-size="13" fill="#ABC0C8">GET /health → counters</text>
+
+    <text x="40" y="540" font-size="13" fill="#8FA6B0">laya-server · Cristian Guerra · QA · Medellín</text>
+  </g>
+</svg>
