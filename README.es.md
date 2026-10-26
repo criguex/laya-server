@@ -2,6 +2,46 @@
 
 ![laya-server: servidor de decisiones local con el contrato de Jev y cascada a la nube](docs/assets/banner.svg)
 
+## Explicado para un niño de 8 años
+
+Cris tiene una fábrica de videos, ADN Generator, que hace videos. Antes de confiar en un video, alguien tiene que responder preguntas rápidas sobre él, como "¿el inicio engancha?" o "¿los comentarios son buenos?". laya-server es un juez pequeño que responde esas preguntas cortas de sí o no y de escoger una opción, gratis, en el propio computador de Cris, que se llama WAR. Cuando una pregunta es muy larga, o el juez no está seguro, le pregunta a un juez más grande que vive en la nube y se llama Jev. Por ahora funciona en **modo sombra**: sus respuestas quedan anotadas para compararlas después, pero nunca frena un video.
+
+<p align="center">
+  <img src="docs/assets/explained.gif" width="720" alt="Historia ilustrada: la fábrica de videos pregunta si el inicio engancha, un juez pequeño y gratis en el computador WAR responde, un guion largo sube a Jev en la nube y, en modo sombra, las respuestas se anotan mientras el video sigue" />
+</p>
+
+### Un ejemplo real
+
+- **Imagina** que la fábrica tiene un video nuevo con una frase de arranque corta. Le pregunta al gate G2: "¿este gancho funciona?"
+- **Qué pasa:** la pregunta es corta (menos de 1.500 caracteres), así que Laya responde en WAR, en mucho menos de un segundo y sin costo. Si Laya está segura en menos de un 80 %, la pregunta sube a Jev.
+- **Otra pregunta,** la del gate G3 "¿el guion encaja con el canal?", lleva la identidad del canal y el guion completo. Eso es demasiado largo para Laya, que lee unas 350 palabras, así que se va directo a Jev.
+- **Qué ganamos:** las preguntas fáciles cuestan $0 y los datos se quedan en casa, las difíciles igual reciben una buena respuesta y, en modo sombra, nada se rompe mientras Cris averigua si Laya es lo bastante buena. Nadie ha medido todavía la calidad de Laya en español: esa medición va antes de confiar en ella.
+
+Qué pregunta va a dónde (sale de [docs/ADN.md](docs/ADN.md)):
+
+| Gate | La pregunta, en palabras simples | Quién responde |
+|---|---|---|
+| G1 | ¿Lo que se dice cuadra con lo que se ve? (ventanas largas de 15 beats) | Jev |
+| G2 | ¿El inicio engancha? | Laya, y Jev si Laya duda |
+| G3 | ¿El video encaja con el canal? | Jev |
+| G4 | Gate de revisión final, armado con G2 y G3 | — |
+| G5 | ¿Funcionan los ganchos de los Shorts? | mixto |
+| G6 | ¿Los comentarios son buenos? | Laya |
+
+### Palabras difíciles
+
+| Palabra | Qué significa |
+|---|---|
+| **Laya** | El "cerebro" pequeño y gratis que corre en el computador de Cris, sin internet. |
+| **Jev** | Un juez más grande en la nube. Sabe más, pero cada pregunta cuesta plata. |
+| **Cascada** | Pasarle una pregunta difícil a alguien que sabe más. |
+| **Umbral 0.8** | Qué tan seguro tiene que estar el juez pequeño (8 de 10) para responder solo. |
+| **Modo sombra** | Modo de práctica: las respuestas se anotan, pero no cambian nada. |
+| **Gate** | Una pregunta de control por la que pasa cada video. |
+| **Tailscale** | Un túnel privado para que solo las máquinas de Cris puedan hablar con el servidor. |
+
+## Qué es
+
 Servidor de decisiones local, gratis y compatible con Jev. Corre [Laya](https://huggingface.co/convaiinnovations/laya) (modelo abierto de System One, Apache-2.0, ~2 GB de RAM, solo CPU) detrás del mismo contrato `POST /v1/systemone` de TypeSafe Jev, con una **cascada** opcional: las respuestas seguras se quedan en local, las dudosas o largas suben a Jev en la nube y, si la nube falla, la respuesta vuelve marcada con `escalate: true` para que la revise una persona.
 
 ## Cómo funciona
