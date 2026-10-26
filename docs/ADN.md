@@ -6,7 +6,7 @@ ADN ya tiene el cliente Jev y los gates G1–G6 en sombra (`src/clients/jev_clie
 ```
 GV_JEV_ENABLED=true
 GV_JEV_MODE=shadow
-GV_JEV_URL=http://100.77.196.62:8787/v1/systemone
+GV_JEV_URL=http://<ip-tailscale-del-nodo>:8787/v1/systemone
 GV_JEV_API_KEY=<LAYA_TOKEN de C:\gwar\laya-server\.env en War>
 GV_JEV_TIMEOUT_S=12
 ```
